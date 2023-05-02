@@ -11,6 +11,7 @@
 <style>
     div {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
     }
@@ -18,12 +19,15 @@
     ul {
         font-size: 40px;
     }
+
     ul li {
         cursor: pointer;
     }
+
     ul li:hover {
         background-color: navajowhite;
     }
+
     li:nth-child(1) {
         color: green;
     }
@@ -43,12 +47,18 @@
     li:nth-child(5) {
         color: blueviolet;
     }
+    .cart {
+        border: 2px solid red;
+        padding: 4px 6px;
+        border-radius: 5px;
+    }
 </style>
 <!-- css end  -->
 
 <body>
     <!-- content start -->
     <div>
+        <div class="cart">0</div>
         <ul class="list-items-container">
             <li>Item 1</li>
             <li>Item 2</li>
@@ -57,15 +67,16 @@
             <li>Item 5</li>
         </ul>
 
-        <p id="selected-items"></p>
+        <p id="selected-items">No items selected</p>
     </div>
 
     <!-- content end  -->
 
     <!-- JavaScript start  -->
     <script>
-        const lis  = document.querySelectorAll('li');
+        const lis = document.querySelectorAll('li');
         const selectedItems = document.getElementById('selected-items');
+        const cart = document.querySelector('.cart');
         lis.forEach((item) => {
             item.addEventListener('click', (e) => {
                 // console.log(e.currentTarget.innerText);
@@ -75,13 +86,16 @@
         });
 
         function showSelectedItems() {
+            let cartValue = 0;
             const items = Array.from(document.querySelectorAll('.list-items-container .selected'));
             const selectedItemsShow = items.map((item) => {
+        
                 return item.innerText;
             });
 
-            console.log(selectedItemsShow);
-            selectedItems.textContent = selectedItemsShow.length > 0 ? selectedItemsShow.join(',') : 'Not selected any items';
+            // console.log(selectedItemsShow);
+            selectedItems.textContent = selectedItemsShow.length > 0 ? selectedItemsShow.join(', ') : 'Not selected any items';
+            cart.innerText = selectedItemsShow.length;
         }
     </script>
     <!-- JavaScript End  -->
