@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list items selected?</title>
+</head>
+<!-- css start -->
+<style>
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    ul {
+        font-size: 40px;
+    }
+    ul li {
+        cursor: pointer;
+    }
+    ul li:hover {
+        background-color: navajowhite;
+    }
+    li:nth-child(1) {
+        color: green;
+    }
+
+    li:nth-child(2) {
+        color: yellow;
+    }
+
+    li:nth-child(3) {
+        color: red;
+    }
+
+    li:nth-child(4) {
+        color: blue;
+    }
+
+    li:nth-child(5) {
+        color: blueviolet;
+    }
+</style>
+<!-- css end  -->
+
+<body>
+    <!-- content start -->
+    <div>
+        <ul class="list-items-container">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+            <li>Item 5</li>
+        </ul>
+
+        <p id="selected-items"></p>
+    </div>
+
+    <!-- content end  -->
+
+    <!-- JavaScript start  -->
+    <script>
+        const lis  = document.querySelectorAll('li');
+        const selectedItems = document.getElementById('selected-items');
+        lis.forEach((item) => {
+            item.addEventListener('click', (e) => {
+                // console.log(e.currentTarget.innerText);
+                item.classList.toggle('selected');
+                showSelectedItems();
+            })
+        });
+
+        function showSelectedItems() {
+            const items = Array.from(document.querySelectorAll('.list-items-container .selected'));
+            const selectedItemsShow = items.map((item) => {
+                return item.innerText;
+            });
+
+            console.log(selectedItemsShow);
+            selectedItems.textContent = selectedItemsShow.length > 0 ? selectedItemsShow.join(',') : 'Not selected any items';
+        }
+    </script>
+    <!-- JavaScript End  -->
+</body>
+
+</html>
